@@ -1,0 +1,60 @@
+.texto{
+    font-family: digital-font;
+    font-size: 1.7em;
+    color: #00658d;
+}
+/*  */
+.cont-tabla{
+    /* border-radius: 1em;  */
+    background-color: white;
+}
+.nav_bar{
+    border-radius: 1em; 
+}
+.tabla-mensajes-slbtr{
+    max-height: 60vh;
+    overflow: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    scrollbar-width: thin;
+}
+.table-header {
+    background-color: #00658d;
+    color: white;
+}
+.btn-reload{
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 10px;
+    color: white;
+    background-color: #00658d;
+    width: fit-content;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 0.3em;
+    transition: all .3s ease-in-out;
+    font-size: 1.2em;
+}
+.btn-reload:hover{
+    transition: all .3s ease-in-out;
+    background-color: #013e57;
+}
+.btn-reload:disabled{
+    cursor: not-allowed;
+    background-color: hsla(0, 0%, 34%, 0.555);
+}
+.table-footer{
+    border-top: 5px solid black;
+}
+.mensaje {
+    width: 100%;
+    text-align: center;
+    margin-top: 70px;
+    color: hsl(204, 4%, 78%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}

@@ -1,0 +1,22 @@
+<div class="calendar-container mat-elevation-z13">
+    <div class="header-calendar">
+        <div>
+            <button (click)="changeMonth(-1)" class=" btn btn-prev"><i class="bi bi-chevron-left"></i></button>
+        </div>
+        <h1>{{dateSelect | date:'MMM, yyyy'}}</h1>
+        <div>
+            <button (click)="changeMonth(1)" class="btn btn-next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+    </div>
+    <ol>
+        <li *ngFor="let day of week" class="day-name">
+            {{day | slice:0:3}}
+        </li>
+        <li class="day" [ngClass]="{'day-active': day.value == daySelect}" (click)="clickDate(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+        *ngFor="let day of monthSelect;let first=first">
+            <span>
+                {{day?.value}}
+            </span>
+        </li>
+    </ol>
+</div>

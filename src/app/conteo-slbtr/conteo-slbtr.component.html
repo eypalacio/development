@@ -1,0 +1,147 @@
+<div class="container-fluid">
+    <div class="p-1 mt-3 encabezado">
+        <label class="texto">conteoSLBTR</label>
+    </div>
+
+    <div class="row p-3 g-2 mt-3 nav_bar">
+        <button class="btn-reload" (click)="reload()" [disabled]="refrescar">
+            <i class="bi bi-arrow-clockwise"></i>Refrescar
+        </button>
+    </div>
+
+    <div class="row mt-3 cont-tabla">
+        <div class="tabla-mensajes-slbtr">
+            <table mat-table [dataSource]="dataSource" class="shadow">
+                <!-- Fecha -->
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Fecha</th>
+                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">Fecha</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.fecha != ''?
+                        (conteoSLBTR.fecha|date:'dd/MM/YYYY'):''}}</td>
+                </ng-container>
+
+                <!-- Hora -->
+                <ng-container matColumnDef="hora">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Hora</th>
+                    <td mat-cell *matCellDef="let element"> {{element.hour}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">Total</td>
+                </ng-container>
+
+
+                <!-- MT_102 -->
+                <ng-container matColumnDef="mt_102">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_102</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_102}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_102</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_102}}</td>
+                </ng-container>
+
+                <!--  Transf_102 -->
+                <ng-container matColumnDef="transf_102">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">Transf_102</th>
+                    <td mat-cell *matCellDef="let element"> {{element.transf_102}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">Transf_102</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.Transf_102}}</td>
+                </ng-container>
+
+                <!-- MT_103 -->
+                <ng-container matColumnDef="mt_103">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_103</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_103}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_103</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_103}}</td>
+                </ng-container>
+
+                <!-- MT_104 -->
+                <ng-container matColumnDef="mt_104">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_104</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_104}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_104</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_104}}</td>
+                </ng-container>
+
+                <!--  Transf_104 -->
+                <ng-container matColumnDef="transf_104">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">Transf_104</th>
+                    <td mat-cell *matCellDef="let element"> {{element.transf_104}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">Transf_104</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.Transf_104}}</td>
+                </ng-container>
+
+                <!-- MT_190 -->
+                <ng-container matColumnDef="mt_190">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_190</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_190}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_190</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_190}}</td>
+                </ng-container>
+
+                <!-- MT_206 -->
+                <ng-container matColumnDef="mt_206">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_206</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_206}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_206</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_206}}</td>
+                </ng-container>
+
+                <!--  Transf_206 -->
+                <ng-container matColumnDef="transf_206">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">Transf_206</th>
+                    <td mat-cell *matCellDef="let element"> {{element.transf_206}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">Transf_206</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.Transf_206}}</td>
+                </ng-container>
+
+                <!-- MT_299 -->
+                <ng-container matColumnDef="mt_299">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_299</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_299}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_299</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_299}}</td>
+                </ng-container>
+
+                <!-- MT_900 -->
+                <ng-container matColumnDef="mt_900">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_900</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_900}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_900</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_900}}</td>
+                </ng-container>
+
+                <!-- MT_910 -->
+                <ng-container matColumnDef="mt_910">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_910</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_910}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_910</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_910}}</td>
+                </ng-container>
+
+                <!-- MT_950 -->
+                <ng-container matColumnDef="mt_950">
+                    <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">MT_950</th>
+                    <td mat-cell *matCellDef="let element"> {{element.mt_950}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">MT_950</td>
+                    <td mat-footer-cell *matFooterCellDef class="table-footer">{{conteoSLBTR.MT_950}}</td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></tr>
+                <!-- <tr mat-footer-row *matFooterRowDef="['disclaimer']; sticky:true"></tr> -->
+            </table>
+
+            <div class="mensaje" *ngIf="mensaje.length==0">
+                <img src="assets/imgs/undraw_not_found.svg" style="width: 25%;height: auto;">
+                <label>No existen mensajes</label>
+            </div>
+
+
+            <mat-paginator [hidden]="!mostrar_pag" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
+</div>

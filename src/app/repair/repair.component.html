@@ -1,0 +1,79 @@
+<div class="row p-3 g-2 mt-3 cont-repair" >
+    <div class="tab-repair">
+
+        <table mat-table [dataSource]="dataSource" class="shadow-sm"> 
+
+            <!-- checkbox -->
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef width="3%">
+                  <mat-checkbox color="primary" (change)="$event ? toggleAllRows() : null"
+                                 (click)="seleccionados(-1)"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation();seleccionados(row.id)"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)"
+                                [disabled]="selection.isSelected(row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+            <!-- RECID -->
+            <ng-container matColumnDef="recid">
+                <th mat-header-cell *matHeaderCellDef width="6%" class="table-header">RECID</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'visto':selection.isSelected(element)}"> {{element.RECID}} </td>
+            </ng-container>
+
+            <!--  Tiempo -->
+            <ng-container matColumnDef="hora">
+                <th mat-header-cell *matHeaderCellDef width="4%" class="table-header">Hora</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'visto':selection.isSelected(element)}"> {{element.hora}} </td>
+            </ng-container>
+
+            <!-- Tipo Msje -->
+            <ng-container matColumnDef="tipo">
+                <th mat-header-cell *matHeaderCellDef width="3%" class="table-header">Tipo de Mensaje</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'visto':selection.isSelected(element)}"> {{element.message_type}} </td>
+            </ng-container>
+
+            <!-- error -->
+            <ng-container matColumnDef="error">
+                <th mat-header-cell *matHeaderCellDef width="15%" class="table-header">Error</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'visto':selection.isSelected(element)}"> {{element.error_code}} </td>
+            </ng-container>
+
+            <!-- tipoEntrada -->
+            <ng-container matColumnDef="tipoEntrada">
+                <th mat-header-cell *matHeaderCellDef width="3%" class="table-header">Tipo de Entrada</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'visto':selection.isSelected(element)}">
+                    {{element.tipo_entrada}}
+                </td>
+            </ng-container>
+
+            <!-- referencia -->
+            <ng-container matColumnDef="referencia">
+                <th mat-header-cell *matHeaderCellDef width="5%" class="table-header">Referencia</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'visto':selection.isSelected(element)}">
+                    {{element.referencia}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" style="color: white;" class="test"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+        </table>
+        <!-- <div class="mensaje" *ngIf="mensaje.length==0">
+            <img src="assets/imgs/undraw_not_found.svg" style="width: 25%;height: auto;">      
+            <label>No existen mensajes</label>
+        </div> -->
+    </div>
+    <!-- <mat-paginator [hidden]="!mostrar_pag" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
+        aria-label="Select page">
+    </mat-paginator> -->
+
+</div>

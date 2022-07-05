@@ -1,0 +1,15 @@
+
+    <div class="stepper shadow pb-4 m-2" style="position: relative;">
+        <mat-stepper label="bottom" #stepper>
+            <mat-step [stepControl]="firstPage">
+                <ng-template matStepLabel>Conteo</ng-template>
+                <app-conteo-t24></app-conteo-t24>
+            </mat-step>
+            <mat-step [stepControl]="secondPage">
+                <ng-template matStepLabel>Repair</ng-template>
+                <app-repair></app-repair>
+            </mat-step>
+        </mat-stepper>   
+    </div>
+
+

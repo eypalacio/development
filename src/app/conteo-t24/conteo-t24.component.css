@@ -1,0 +1,16 @@
+.contenedor{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+.ptos{
+    position: absolute;
+    left: 20%;
+    bottom: 150px;
+
+        background-color: #fff;
+        background-image: radial-gradient(circle, #00f 20%, transparent 10%), radial-gradient(circle, #00f 20%, transparent 10%);
+        background-size: 178px 178px;
+        background-position: 0 0, 0 0;
+      
+}

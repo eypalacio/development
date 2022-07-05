@@ -1,0 +1,129 @@
+<div class="cont-tabla mat-elevation-z8">
+  <div class="rombo"></div>
+  <div class="encabezado">
+    <label class="texto-grand">Total mensajes SWIFT recibidos</label>
+    <label class="texto-peq">livet24</label>
+    <label class="fecha">{{horaActual | date:'dd MMM YYYY'}}</label>
+    <label class="hora">{{horaActual | date:'hh:mm:ss'}}</label>
+  </div>
+  <!-- contenedor de las busquedas -->
+  <div class="search-container">
+    <!-- boton exec ETL -->
+    <button type="button" class="btn btn-exc btn-secondary" (click)="excETL();loadMensaje()">.bat</button>
+  
+    <!-- clean all -->
+    <button mat-raised-button color="" class="clean-search" (click)="fecha='';tipoMsje=-1;hora='';loadMensaje()"
+      *ngIf="fecha!=''&& tipoMsje!= -1 && hora!=''">
+      <i class="bi bi-trash3"></i>
+    </button>
+
+    <!--  buscar por fecha  -->
+    <mat-form-field style="width: 120px !important" appearance="outline" class="search">
+      <mat-label>Filtrar por fecha</mat-label>
+      <input matInput [matDatepicker]="picker" name="fecha" [(ngModel)]="fecha" (ngModelChange)="search()" readonly>
+      <mat-datepicker-toggle #toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+
+      <button matSuffix mat-icon-button aria-label="Clear" class="btn" (click)="fecha='';search()" *ngIf="fecha !=_fecha">
+        <i class="bi bi-x"></i>
+      </button>
+    </mat-form-field>
+
+    <!-- horas new -->
+    <mat-form-field style="width: 120px !important" appearance="outline" class="seleccionar">
+      <mat-label>Filtrar por hora</mat-label>
+      <mat-select name="hora" [(ngModel)]="hora" (ngModelChange)="search()">
+        <mat-option *ngFor="let var_hora of horas" [value]="var_hora.hora">{{var_hora.hora}}</mat-option>
+      </mat-select>
+      <button matSuffix mat-icon-button aria-label="Clear" class="btn" (click)="hora='';search()" *ngIf="hora !=''">
+        <i class="bi bi-x"></i>
+      </button>
+    </mat-form-field>
+    <!-- end -->
+
+    <!-- buscar tipo mensaje -->
+    <mat-form-field style="width: 120px !important" appearance="outline" class="seleccionar">
+      <mat-label>Tipo Mensaje</mat-label>
+      <mat-select name="tipoMensaje" [(ngModel)]="tipoMsje" (ngModelChange)="search()">
+        <mat-option *ngFor="let tipoMensaje of tipoMensajeList" [value]="tipoMensaje">{{tipoMensaje}}</mat-option>
+      </mat-select>
+      <button matSuffix mat-icon-button aria-label="Clear" class="btn" *ngIf="tipoMsje !=-1"
+        (click)="tipoMsje=-1;search()">
+        <i class="bi bi-x"></i>
+      </button>
+    </mat-form-field>
+
+  </div>
+
+  <!-- tabla que muestra del conteo de T24 -->
+  <div class="tabla-mensaje">
+    <table mat-table [dataSource]="dataSource">
+
+      <!-- Tipo Mensaje -->
+      <ng-container matColumnDef="tipoM">
+        <th mat-header-cell *matHeaderCellDef width="10%">Tipo Mensaje</th>
+        <td mat-cell *matCellDef="let element"> {{element.tipoM}} </td>
+      </ng-container>
+
+      <!--  Total Recibido -->
+      <ng-container matColumnDef="totalRecibido">
+        <th mat-header-cell *matHeaderCellDef width="10%">Total Recibido</th>
+        <td mat-cell *matCellDef="let element"> {{element.totalRecibido==0?'-':element.totalRecibido}} </td>
+      </ng-container>
+
+      <!-- FT Aut -->
+      <ng-container matColumnDef="ftAutorizadas">
+        <th mat-header-cell *matHeaderCellDef width="8%">FT Aut</th>
+        <td mat-cell *matCellDef="let element"> {{element.ftAutorizadas==0?'-':element.ftAutorizadas}} </td>
+      </ng-container>
+
+      <!-- FT INAU -->
+      <ng-container matColumnDef="ftINAU">
+        <th mat-header-cell *matHeaderCellDef width="8%">FT INAU</th>
+        <td mat-cell *matCellDef="let element"> {{element.ftINAU==0?'-':element.ftINAU}} </td>
+      </ng-container>
+
+      <!-- Rem Acep -->
+      <ng-container matColumnDef="remesasAceptadas">
+        <th mat-header-cell *matHeaderCellDef width="10%">Remesas Aceptadas</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.tipoM==900||element.tipoM==103||element.tipoM==190||element.tipoM==910?'':element.remesasAceptadas==0?'-':element.remesasAceptadas}}
+        </td>
+      </ng-container>
+
+      <!-- Total Transf -->
+      <ng-container matColumnDef="totalOpe">
+        <th mat-header-cell *matHeaderCellDef width="10%">Total Transferencias</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.tipoM==900||element.tipoM==103||element.tipoM==190||element.tipoM==910?'':element.totalOpe==0?'-':element.totalOpe}} </td>
+      </ng-container>
+
+      <!-- Fecha -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef width="10%">Fecha</th>
+        <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+      </ng-container>
+
+      <!-- Hora -->
+      <ng-container matColumnDef="hora">
+        <th mat-header-cell *matHeaderCellDef width="10%">Hora</th>
+        <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div class="mensaje">
+      <label *ngIf="mensaje.length==0">No existen mensajes</label>
+    </div>
+  </div>
+
+  <mat-paginator [hidden]="!mostrar_pag" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page">
+  </mat-paginator>
+
+  <div class="patente">
+    <label>by</label>
+    <label>Gerencia de Gestion de Tecnologias Bancarias</label>
+  </div>
+
+</div>

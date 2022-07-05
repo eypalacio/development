@@ -1,0 +1,122 @@
+<div class="container-fluid">
+    <div class="p-1 mt-3 encabezado">
+        <label class="texto">conteoT24</label>
+        <div class="date">
+            <label class="datefecha">{{horaActual | date:'dd MMM YYYY'}}</label>
+            <label class="datehora"> {{horaActual | date:'hh:mm:ss'}}</label>
+        </div>
+    </div>
+
+    <div class="row p-2 g-1 mt-3">
+        <!-- <div class="col-sm-1 seleccionar"></div> -->
+        <div class="col-sm-3 seleccionar">
+            <label for="tipoMsje">Seleccionar tipo de Mensaje</label>
+            <select class="in border" name="tipoMsje" id="tipoMsje" [(ngModel)]="tipoMsje" (ngModelChange)="search()">
+                <option value="-1" selected disabled hidden>Tipo</option>
+                <option *ngFor="let tipoMensaje of tipoMensajeList" [value]="tipoMensaje">{{tipoMensaje}}</option>
+            </select>
+            <!-- <button class="btn-borrar" *ngIf="tipoMsje !=-1" (click)="tipoMsje=-1;search()">
+                <i class="bi bi-x"></i>
+            </button> -->
+        </div>
+        <div class="col-sm-3 seleccionar">
+            <label for="hora">Seleccionar hora</label>
+            <select name="hora" id="hora" class="in border" [(ngModel)]="hora" (ngModelChange)="search()">
+                <option value="" selected disabled>Hora</option>
+                <option *ngFor="let var_hora of horas" [value]="var_hora.hora">{{var_hora.hora}}</option>
+            </select>
+            <!-- <button class="btn-borrar" (click)="hora='';search()" *ngIf="hora !=''">
+                <i class="bi bi-x"></i>
+            </button> -->
+        </div>
+        <div class="col-sm-3 seleccionar">
+            <label for="date">Seleccionar fecha</label>
+            <input type="date" class="in border" id="date" [(ngModel)]="fecha" (ngModelChange)="search();selectHoras()">
+            <!-- <button class="btn-borrar" (click)="fecha='';search()" *ngIf="fecha !=''">
+                <i class="bi bi-x"></i>
+              </button> -->
+        </div>
+        <div class="col-sm-1 seleccionar">
+            <button class="btn-borrar" [disabled]="(fecha=='' || fecha == undefined) && tipoMsje==-1 && hora==''"
+                (click)="fecha='';tipoMsje=-1;hora='';loadMensaje()">
+                <i class="bi bi-trash3"></i>
+            </button>
+        </div>
+        <div class="col-sm-2 seleccionar " style="position: relative;">
+            <button class="btn-ejecutar" (click)="execETL()" style="position: absolute; right: 0;">
+                <i class="bi bi-gear-wide-connected">run ETL</i>
+                
+            </button>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="tabla-mensaje">
+            <table mat-table [dataSource]="dataSource" class="shadow">
+
+                <!-- Tipo Mensaje -->
+                <ng-container matColumnDef="tipoM">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Tipo Mensaje</th>
+                    <td mat-cell *matCellDef="let element"> {{element.tipoM}} </td>
+                </ng-container>
+
+                <!--  Total Recibido -->
+                <ng-container matColumnDef="totalRecibido">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Total Recibido</th>
+                    <td mat-cell *matCellDef="let element"> {{element.totalRecibido==0?'-':element.totalRecibido}} </td>
+                </ng-container>
+
+                <!-- FT Aut -->
+                <ng-container matColumnDef="ftAutorizadas">
+                    <th mat-header-cell *matHeaderCellDef width="8%" class="table-header">FT Aut</th>
+                    <td mat-cell *matCellDef="let element"> {{element.ftAutorizadas==0?'-':element.ftAutorizadas}} </td>
+                </ng-container>
+
+                <!-- FT INAU -->
+                <ng-container matColumnDef="ftINAU">
+                    <th mat-header-cell *matHeaderCellDef width="8%" class="table-header">FT INAU</th>
+                    <td mat-cell *matCellDef="let element"> {{element.ftINAU==0?'-':element.ftINAU}} </td>
+                </ng-container>
+
+                <!-- Rem Acep -->
+                <ng-container matColumnDef="remesasAceptadas">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Remesas Aceptadas</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.tipoM==900||element.tipoM==103||element.tipoM==190||element.tipoM==910?'':element.remesasAceptadas==0?'-':element.remesasAceptadas}}
+                    </td>
+                </ng-container>
+
+                <!-- Total Transf -->
+                <ng-container matColumnDef="totalOpe">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Total Transferencias</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.tipoM==900||element.tipoM==103||element.tipoM==190||element.tipoM==910?'':element.totalOpe==0?'-':element.totalOpe}}
+                    </td>
+                </ng-container>
+
+                <!-- Fecha -->
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Fecha</th>
+                    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                </ng-container>
+
+                <!-- Hora -->
+                <ng-container matColumnDef="hora">
+                    <th mat-header-cell *matHeaderCellDef width="10%" class="table-header">Hora</th>
+                    <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div class="mensaje" *ngIf="mensaje.length==0">
+                <img src="assets/imgs/undraw_not_found.svg" style="width: 25%;height: auto;">      
+                <label>No existen mensajes</label>
+            </div>
+        </div>
+        <mat-paginator [hidden]="!mostrar_pag" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
+            aria-label="Select page">
+        </mat-paginator>
+
+</div>
+</div>

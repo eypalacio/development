@@ -1,0 +1,22 @@
+::ng-deep .mat-horizontal-stepper-header-container{
+    position: absolute;
+    bottom: 5px;
+    width: 20%;
+    left: 40%;
+}
+::ng-deep .mat-step-header{
+    display: flex;
+    flex-direction: column;
+    transform: translateY(5px);
+} 
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: #00658d; 
+ }
+ .stepper{
+     position: fixed;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     height: 90%;
+ }

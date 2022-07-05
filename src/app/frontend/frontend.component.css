@@ -1,0 +1,21 @@
+/* .tab-agenda{
+  position: absolute;
+  top: 1%;
+  left: 5%;
+  right: 0.7%;
+  bottom: 1%;
+  border-radius: 30px;
+  background-color: aliceblue;
+} */
+.tab-agenda table{
+  /* border-radius: 30px; */
+  position: absolute;
+  /* margin-top: 40px; */
+  text-align: center;
+  left: 15%;
+  right: 0.7%;
+  top: 15%;
+  background-color: aliceblue;
+  width: 800px;
+  height: 400px;
+}

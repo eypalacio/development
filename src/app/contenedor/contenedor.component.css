@@ -1,0 +1,80 @@
+.contenedor {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(232, 232, 232, 0.71);
+}
+
+.cuadrado {
+  position: absolute;
+  bottom: 20px;
+  left: -300px;
+  height: 350px;
+  width: 450px;
+  /*background-color: palevioletred;*/
+  background-color: #018abe;
+  border-radius: 8px;
+  opacity: .5;
+  transform: rotate(50deg);
+}
+
+.ptos {
+  background-image: radial-gradient(#2f3b3f 2px, transparent 2px);
+  background-size: 34px 34px;
+  background-color: transparent;
+  position: absolute;
+  bottom: 250px;
+  left: -100px;
+  height: 150px;
+  width: 250px;
+  transform: rotate(50deg);
+}
+
+.cuadrado-1 {
+  position: absolute;
+  top: 20px;
+  right: -150px;
+  height: 350px;
+  width: 450px;
+  background-color: #018abe;
+  border-radius: 8px;
+  transform: rotate(50deg);
+}
+
+.puntos {
+  background-image: radial-gradient(#2f3b3f 2px, transparent 2px), radial-gradient(#2f3b3f 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  /*background-image: radial-gradient(#2f3b3f 4px, transparent 4px);*/
+  opacity: .5;
+  /*background-size: 36px 36px;*/
+  background-color: transparent;
+  position: absolute;
+  top: 250px;
+  right: 70px;
+  height: 160px;
+  width: 250px;
+  transform: rotate(50deg);
+}
+
+.rombo-1 {
+  position: absolute;
+  right: 90px;
+  bottom: 50px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background: #018abe;
+  opacity: .1;
+}
+
+.footer h5 {
+  position: absolute;
+  left: 42%;
+  top: 85%;
+}
+.footer h6{
+  position: absolute;
+  left: 49%;
+  top: 83%;
+}

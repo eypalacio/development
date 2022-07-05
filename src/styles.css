@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
+  /*background: linear-gradient( rgba(169, 169, 169, 0.39), rgba(0, 139, 139, 0.25));*/
+  backdrop-filter: blur(10px);
+
+}
+
+@font-face {
+  font-family: digital-font;
+  src: url('assets/fonts/digital/digital geometric bold.ttf');
+}
+
+@font-face {
+  font-family: jabore;
+  src: url('assets/fonts/jabore/jabore.otf');
+}
+
+@font-face {
+  font-family: quisnue;
+  src: url('assets/fonts/quisnue/quisnue.otf');
+}
